@@ -2,12 +2,14 @@
 
 namespace frontend\modules\cp\controllers;
 
+use common\models\Category;
 use common\models\Menu;
 use common\models\search\MenuSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\web\UploadedFile;
+use Yii;
 /**
  * MenuController implements the CRUD actions for Menu model.
  */
@@ -36,14 +38,19 @@ class MenuController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($id = null)
     {
+        if(!$id){
+            $id = Category::find()->min('id');
+        }
         $searchModel = new MenuSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
+        $dataProvider = $searchModel->search($this->request->queryParams,$id);
+        $model = new Menu();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=>$model,
+            'id'=>$id
         ]);
     }
 
@@ -70,8 +77,15 @@ class MenuController extends Controller
         $model = new Menu();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                if($model->image = UploadedFile::getInstance($model,'image')){
+                    $name = microtime(true).'.'.$model->image->extension;
+                    $model->image->saveAs(Yii::$app->basePath.'/web/upload/'.$name);
+                    $model->image = $name;
+                }
+                if($model->save()){
+                    return $this->redirect(['index','id'=>$model->category_id]);
+                }
             }
         } else {
             $model->loadDefaultValues();
@@ -81,7 +95,17 @@ class MenuController extends Controller
             'model' => $model,
         ]);
     }
-
+    public function actionStatus($id)
+    {
+        $model = $this->findModel($id);
+        if($model->status == 1){
+            $model->status = 2;
+        }else{
+            $model->status = 1;
+        }
+        $model->save(false);
+        return $this->redirect(['index','id'=>$model->category_id]);
+    }
     /**
      * Updates an existing Menu model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -93,11 +117,21 @@ class MenuController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $img = $model->image;
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            if($model->image = UploadedFile::getInstance($model,'image')){
+                $name = microtime(true).'.'.$model->image->extension;
+                $model->image->saveAs(Yii::$app->basePath.'/web/upload/'.$name);
+                $model->image = $name;
+            }else{
+                $model->image = $img;
+            }
+            if($model->save()){
+                return $this->redirect(['index','id'=>$model->category_id]);
+            }
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('_form', [
             'model' => $model,
         ]);
     }
@@ -111,9 +145,10 @@ class MenuController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $model = $this->findModel($id);
+        $model->status = 0;
+        $model->save(false);
+        return $this->redirect(['index','id'=>$model->category_id]);
     }
 
     /**

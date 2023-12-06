@@ -39,9 +39,9 @@ class MenuSearch extends Menu
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$id)
     {
-        $query = Menu::find()->where(['<>','status',-1]);
+        $query = Menu::find()->where(['<>','status',0])->andWhere(['category_id'=>$id]);
 
         // add conditions that should always apply here
 

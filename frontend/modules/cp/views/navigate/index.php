@@ -79,6 +79,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 
+
+
+</div>
+
     <div class="modal hide fade bs-example-modal-lg" id="update" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg ">
             <div class="modal-content">
@@ -95,10 +99,6 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-
-</div>
-
-
 <?php
     $this->registerJs("
         $('.update').click(function(){

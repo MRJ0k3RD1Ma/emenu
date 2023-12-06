@@ -3,11 +3,13 @@
 namespace frontend\modules\cp\controllers;
 
 use common\models\Category;
+use common\models\Navigate;
 use common\models\search\CategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\web\UploadedFile;
+use Yii;
 /**
  * CategoryController implements the CRUD actions for Category model.
  */
@@ -36,14 +38,21 @@ class CategoryController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($id=null)
     {
+        if(!$id){
+            $id = Navigate::find()->min('id');
+        }
         $searchModel = new CategorySearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider = $searchModel->search($this->request->queryParams,$id);
 
+        $model = new Category();
+        $model->id = "";
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=>$model,
+            'id'=>$id
         ]);
     }
 
@@ -70,18 +79,34 @@ class CategoryController extends Controller
         $model = new Category();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['index']);
+            if ($model->load($this->request->post())) {
+                if($model->image = UploadedFile::getInstance($model,'image')){
+                    $name = microtime(true).'.'.$model->image->extension;
+                    $model->image->saveAs(Yii::$app->basePath.'/web/upload/'.$name);
+                    $model->image = $name;
+                }
+                if($model->save()){
+                    return $this->redirect(['index','id'=>$model->navigate_id]);
+                }
             }
         } else {
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
+        return $this->redirect(['index']);
 
+    }
+    public function actionStatus($id)
+    {
+        $model = $this->findModel($id);
+        if($model->status == 1){
+            $model->status = 2;
+        }else{
+            $model->status = 1;
+        }
+        $model->save(false);
+        return $this->redirect(['index','id'=>$model->navigate_id]);
+    }
     /**
      * Updates an existing Category model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -92,12 +117,21 @@ class CategoryController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $img = $model->image;
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            if($model->image = UploadedFile::getInstance($model,'image')){
+                $name = microtime(true).'.'.$model->image->extension;
+                $model->image->saveAs(Yii::$app->basePath.'/web/upload/'.$name);
+                $model->image = $name;
+            }else{
+                $model->image = $img;
+            }
+            if($model->save()){
+                return $this->redirect(['index','id'=>$model->navigate_id]);
+            }
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('_form', [
             'model' => $model,
         ]);
     }
@@ -111,10 +145,12 @@ class CategoryController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $model = $this->findModel($id);
+        $model->status = 0;
+        $model->save(false);
+        return $this->redirect(['index','id'=>$model->navigate_id]);
     }
+
 
     /**
      * Finds the Category model based on its primary key value.

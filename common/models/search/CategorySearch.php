@@ -2,6 +2,7 @@
 
 namespace common\models\search;
 
+use common\models\Navigate;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Category;
@@ -38,9 +39,10 @@ class CategorySearch extends Category
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$id=null)
     {
-        $query = Category::find()->where(['<>','status',-1]);
+
+        $query = Category::find()->where(['<>','status',0])->andWhere(['navigate_id'=>$id]);
 
         // add conditions that should always apply here
 

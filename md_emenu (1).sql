@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2023 at 10:17 AM
+-- Generation Time: Dec 06, 2023 at 11:58 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -36,6 +36,13 @@ CREATE TABLE `category` (
   `sort` int(10) UNSIGNED NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`, `navigate_id`, `status`, `image`, `sort`) VALUES
+(1, 'ИЧИМЛИКЛАР', 1, 1, '1701859262.7994.jpg', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -54,6 +61,13 @@ CREATE TABLE `menu` (
   `sort` int(10) UNSIGNED NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data for table `menu`
+--
+
+INSERT INTO `menu` (`id`, `name`, `comment`, `narxi`, `narxi2`, `image`, `status`, `category_id`, `sort`) VALUES
+(1, 'Coca Cola', '', 20000, 0, '1701859590.5174.jpg', 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -66,6 +80,15 @@ CREATE TABLE `navigate` (
   `status` int(10) UNSIGNED NOT NULL DEFAULT 1,
   `sort` int(10) UNSIGNED NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `navigate`
+--
+
+INSERT INTO `navigate` (`id`, `name`, `status`, `sort`) VALUES
+(1, 'БАР', 1, 1),
+(2, 'КУХНЯ', 1, 1),
+(3, 'КАЛЬЯНЫ', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -169,19 +192,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `navigate`
 --
 ALTER TABLE `navigate`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`

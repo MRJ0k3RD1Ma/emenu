@@ -2,6 +2,9 @@
 
 namespace frontend\controllers;
 
+use common\models\Category;
+use common\models\Menu;
+use common\models\Navigate;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -71,9 +74,27 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id = null)
     {
-        return $this->render('index');
+        if(!$id){
+            $id = Navigate::find()->min('id');
+        }
+        $category = Category::find()->where(['navigate_id'=>$id])->andWhere(['status'=>1])->all();
+        return $this->render('index',[
+            'id'=>$id,
+            'category'=>$category
+        ]);
+    }
+
+
+    public function actionCategory($id){
+        $category = Category::findOne($id);
+        $menu = Menu::find()->where(['category_id'=>$id])->andWhere(['status'=>1])->all();
+
+        return $this->render('menu',[
+            'menu'=>$menu,
+            'id'=>$category->navigate_id
+        ]);
     }
 
     /**

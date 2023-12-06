@@ -28,22 +28,6 @@ AppAsset::register($this);
     <body  class="login-page">
     <?php $this->beginBody() ?>
 
-    <div class="login-header box-shadow">
-        <div
-                class="container-fluid d-flex justify-content-between align-items-center"
-        >
-            <div class="brand-logo">
-                <a href="<?= Yii::$app->urlManager->createUrl(['/site/login'])?>">
-                    <img src="/design/vendors/images/deskapp-logo.svg" alt="" />
-                </a>
-            </div>
-            <div class="login-menu">
-                <ul>
-                    <li><a href="#">Register</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
 
 
     <div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">

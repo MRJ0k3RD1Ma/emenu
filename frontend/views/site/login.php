@@ -25,12 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <input class="btn btn-primary btn-lg btn-block" type="submit" value="Kirish">
 
                     </div>
-                    <div class="font-16 weight-600 pt-10 pb-10 text-center" data-color="#707373">
-                        YOKI
-                    </div>
-                    <div class="input-group mb-0">
-                        <a class="btn btn-outline-primary btn-lg btn-block" href="#">Yangi akkount ochish</a>
-                    </div>
+
                 </div>
             </div>
 

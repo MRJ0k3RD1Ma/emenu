@@ -34,10 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= $model->phone ?>
                     </li>
                     <li>
-                        <span>Manzil:</span>
-                        <?= $model->fulladdress ?>
-                    </li>
-                    <li>
                         <span>Yaratilgan:</span>
                         <?= $model->created ?>
                     </li>
@@ -96,7 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
             <?php
-            $getdistrict = Yii::$app->urlManager->createUrl(['/cp/default/getdistrict']);
+
             $this->registerJs("
                             function readURL(input) {
                               if (input.files && input.files[0]) {
@@ -113,12 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             $('#user-image').change(function() {
                               readURL(this);
                             });
-                       $('#user-region_id').change(function(){
-                           $.get('{$getdistrict}?id='+$('#user-region_id').val()).done(function(data){
-                                $('#user-district_id').empty();
-                                $('#user-district_id').append(data);
-                           })  
-                       });
+                    
                     "); ?>
             </div>
         </div>

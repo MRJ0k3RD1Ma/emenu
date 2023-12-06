@@ -20,9 +20,6 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'role_id')->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\UserRole::find()->all(),'id','name'),['prompt'=>'Rolni tanlang']) ?>
-
-
             <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
 
@@ -45,16 +42,6 @@ use yii\widgets\ActiveForm;
 
 
     </div>
-    <div class="row">
-        <div class="col-md-6">
-
-           <?= $form->field($model,'region_id')->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\RegionView::find()->all(),'region_id','name_lot'),['prompt'=>'Viloyatni tanlang'])?>
-
-        </div>
-        <div class="col-md-6">
-            <?= $form->field($model,'district_id')->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\DistrictView::find()->where(['region_id'=>$model->region_id])->all(),'id','name_lot'),['prompt'=>'Tumanni tanlang'])?>
-        </div>
-    </div>
 
     <div class="form-group">
         <?= Html::submitButton('Saqlash', ['class' => 'btn btn-success']) ?>
@@ -64,7 +51,6 @@ use yii\widgets\ActiveForm;
 
 </div>
 <?php
-$getdistrict = Yii::$app->urlManager->createUrl(['/cp/default/getdistrict']);
 $this->registerJs("
         function readURL(input) {
           if (input.files && input.files[0]) {
@@ -81,10 +67,5 @@ $this->registerJs("
         $('#user-image').change(function() {
           readURL(this);
         });
-   $('#user-region_id').change(function(){
-       $.get('{$getdistrict}?id='+$('#user-region_id').val()).done(function(data){
-            $('#user-district_id').empty();
-            $('#user-district_id').append(data);
-       })  
-   });
+ 
 ");

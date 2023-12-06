@@ -71,18 +71,9 @@ class UserController extends Controller
     {
         $model = new User();
         $model->scenario = "insert";
-        $model->region_id = Yii::$app->params['default.region_id'];
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-                if($model->region_id != 17){
-                    if($model->district_id){
-                        $model->soato_id = $model->district_id;
-                    }else{
-                        $model->soato_id = "17".$model->region_id;
-                    }
-                }else{
-                    $model->soato_id = 17;
-                }
+
                 if($model->image = UploadedFile::getInstance($model,'image')){
                     $name = 'avatar/'.microtime(true).".".$model->image->extension;
                     if(!file_exists(Yii::$app->basePath.'/web/upload/avatar')){
@@ -128,16 +119,7 @@ class UserController extends Controller
         $img = $model->image;
         $pas = $model->password;
         if ($this->request->isPost && $model->load($this->request->post())) {
-            // address changer
-            if($model->region_id != 17){
-                if($model->district_id){
-                    $model->soato_id = $model->district_id;
-                }else{
-                    $model->soato_id = "17".$model->region_id;
-                }
-            }else{
-                $model->soato_id = 17;
-            }
+
             if($model->image = UploadedFile::getInstance($model,'image')){
                 $name = 'avatar/'.microtime(true).".".$model->image->extension;
                 if(!file_exists(Yii::$app->basePath.'/web/upload/avatar')){

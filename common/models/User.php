@@ -19,17 +19,11 @@ use yii\web\IdentityInterface;
  * @property string|null $created
  * @property string|null $updated
  * @property int|null $status
- * @property int|null $role_id
  * @property string|null $image
- * @property int $soato_id
  * @property string $phone
- *
- * @property UserRole $role
- * @property Soato $soato
  */
 class User extends \yii\db\ActiveRecord  implements IdentityInterface
 {
-    public $region_id,$district_id;
     const STATUS_DELETED = -1;
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
@@ -49,15 +43,12 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
     {
         return [
             [['created', 'updated'], 'safe'],
-            [['username','password','phone','role_id','region_id','name'],'required','on'=>'insert'],
+            [['username','password','name'],'required','on'=>'insert'],
             [['name','phone'],'required'],
-            [['status', 'role_id', 'soato_id','region_id','district_id'], 'integer'],
-            [['soato_id'], 'required'],
+            [['status', ], 'integer'],
             [['name', 'username', 'auth_key', 'token', 'code', 'image', 'phone'], 'string', 'max' => 255],
             [['password', 'access_token'], 'string', 'max' => 500],
             [['username'], 'unique'],
-            [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserRole::class, 'targetAttribute' => ['role_id' => 'id']],
-            [['soato_id'], 'exist', 'skipOnError' => true, 'targetClass' => Soato::class, 'targetAttribute' => ['soato_id' => 'id']],
         ];
     }
 
@@ -78,52 +69,12 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
             'created' => 'Yaratildi',
             'updated' => 'O`zgartirildi',
             'status' => 'Status',
-            'role_id' => 'Roli',
             'image' => 'Rasm',
-            'soato_id' => 'Manzil',
-            'region_id' => 'Viloyat',
-            'district_id' => 'Tuman',
             'phone' => 'Telefon raqami',
         ];
     }
 
-    /**
-     * Gets query for [[Role]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRole()
-    {
-        return $this->hasOne(UserRole::class, ['id' => 'role_id']);
-    }
 
-    /**
-     * Gets query for [[Soato]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSoato()
-    {
-        return $this->hasOne(Soato::class, ['id' => 'soato_id']);
-    }
-
-    public function getFulladdress(){
-        $ret = "";
-        if($soato = Soato::findOne($this->soato_id)){
-
-            if($soato->region_id){
-                $ret .= RegionView::findOne(['region_id'=>$soato->region_id])->name_lot;
-                if($soato->district_id){
-                    $ret .= $soato->name_lot;
-                }
-            }else{
-                $ret = $soato->name_lot;
-            }
-
-        }
-
-        return $ret;
-    }
 
 
 

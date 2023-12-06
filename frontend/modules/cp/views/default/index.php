@@ -1,5 +1,5 @@
 <?php
 
-$this->title = 'Hodimlar ro`yhati';
+$this->title = 'Dashboard';
 $this->params['breadcrumbs'][] = $this->title;
 ?>

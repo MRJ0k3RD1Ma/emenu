@@ -4,12 +4,12 @@ namespace common\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\User;
+use common\models\Menu;
 
 /**
- * UserSearch represents the model behind the search form of `common\models\User`.
+ * MenuSearch represents the model behind the search form of `common\models\Menu`.
  */
-class UserSearch extends User
+class MenuSearch extends Menu
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,9 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['id', 'status', ], 'integer'],
-            [['name', 'username', 'password', 'auth_key', 'token', 'code', 'access_token', 'created', 'updated', 'image', 'phone'], 'safe'],
+            [['id', 'status', 'category_id', 'sort'], 'integer'],
+            [['name', 'comment', 'image'], 'safe'],
+            [['narxi', 'narxi2'], 'number'],
         ];
     }
 
@@ -40,7 +41,7 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = Menu::find()->where(['<>','status',-1]);
 
         // add conditions that should always apply here
 
@@ -59,20 +60,16 @@ class UserSearch extends User
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'created' => $this->created,
-            'updated' => $this->updated,
+            'narxi' => $this->narxi,
+            'narxi2' => $this->narxi2,
             'status' => $this->status,
+            'category_id' => $this->category_id,
+            'sort' => $this->sort,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'password', $this->password])
-            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'token', $this->token])
-            ->andFilterWhere(['like', 'code', $this->code])
-            ->andFilterWhere(['like', 'access_token', $this->access_token])
-            ->andFilterWhere(['like', 'image', $this->image])
-            ->andFilterWhere(['like', 'phone', $this->phone]);
+            ->andFilterWhere(['like', 'comment', $this->comment])
+            ->andFilterWhere(['like', 'image', $this->image]);
 
         return $dataProvider;
     }

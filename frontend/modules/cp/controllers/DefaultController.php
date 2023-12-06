@@ -71,14 +71,6 @@ class DefaultController extends Controller
         }
     }
 
-    public function actionGetdistrict($id){
-        $res = "<option value=''>- Tumanni tanlang -</option>";
-        $model = DistrictView::find()->where(['region_id'=>$id])->all();
-        foreach ($model as $item){
-            $res .= "<option value='{$item->id}'>{$item->name_lot}</option>";
-        }
-        return $res;
-    }
 
 
 }

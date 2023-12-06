@@ -22,6 +22,27 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['/cp/menu'])?>" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-list"></span>
+                        <span class="mtext">Menu</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['/cp/category'])?>" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-collection"></span>
+                        <span class="mtext">Kategoriyalar</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['/cp/navigate'])?>" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-archive"></span>
+                        <span class="mtext">Navigatsiya</span>
+                    </a>
+                </li>
+
 
 
                 <li>

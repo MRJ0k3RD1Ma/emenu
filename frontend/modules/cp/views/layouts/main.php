@@ -29,18 +29,7 @@ AppAsset::register($this);
     <?php $this->beginBody() ?>
 
 
-    <!--<div class="pre-loader">
-        <div class="pre-loader-box">
-            <div class="loader-logo">
-                <img src="/design/vendors/images/deskapp-logo.svg" alt="" />
-            </div>
-            <div class="loader-progress" id="progress_div">
-                <div class="bar" id="bar1"></div>
-            </div>
-            <div class="percent" id="percent1">0%</div>
-            <div class="loading-text">Loading...</div>
-        </div>
-    </div>-->
+
 
 
 
@@ -75,7 +64,7 @@ AppAsset::register($this);
                 </div>
             </div>
             <div class="footer-wrap pd-20 mb-20 card-box">
-                Qurilish nazorati - <a href="#" target="_blank">LLC "FAST SOFTWARE TECHNOLOGY"</a> All rights reserved &copy;<?= date('Y')?>
+                eMenu - <a href="http://ecafe.uz" target="_blank">script.uz</a> All rights reserved &copy;<?= date('Y')?>
             </div>
         </div>
 

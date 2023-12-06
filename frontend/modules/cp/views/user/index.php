@@ -48,24 +48,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     //'access_token',
                     //'updated',
                     //'role_id',
-                    [
-                        'attribute'=>'role_id',
-                        'value'=>function($d){
-                            return $d->role->name;
-                        },
-                        'filter'=>\yii\helpers\ArrayHelper::map(\common\models\UserRole::find()->all(),'id','name')
-                    ],
+
                     //'image',
                     //'soato_id',
-                    [
-                        'attribute'=>'soato_id',
-                        'value'=>function($d){
-                            return $d->fulladdress;
-                        },
-                        'filter'=> $searchModel->soato_id ?
-                            \yii\helpers\ArrayHelper::map(\common\models\DistrictView::find()->where(['region_id'=>$searchModel->soato_id])->all(),'id','name_lot')
-                            : \yii\helpers\ArrayHelper::map(\common\models\RegionView::find()->all(),'region_id','name_lot')
-                    ],
+
 //                    'status',
                     [
                         'attribute'=>'status',

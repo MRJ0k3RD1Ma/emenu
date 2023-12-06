@@ -45,12 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Yii::$app->params['user.status'][$d->status];
                         }
                     ],
-                    [
-                        'attribute'=>'role_id',
-                        'value'=>function($d){
-                            return $d->role->name;
-                        }
-                    ],
 //                    'status',
 //                    'role_id',
 //                    'image',
@@ -62,12 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'format'=>'raw'
                     ],
 //                    'soato_id',
-                    [
-                        'attribute'=>'soato_id',
-                        'value'=>function($d){
-                            return $d->fulladdress;
-                        }
-                    ],
+
                     'phone',
                 ],
             ]) ?>

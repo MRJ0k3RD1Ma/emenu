@@ -25,9 +25,7 @@
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                     <a class="dropdown-item" href="<?= Yii::$app->urlManager->createUrl(['/default/profil']) ?>"><i
                                 class="dw dw-user1"></i> Profil</a>
-                    <a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
-                    <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
-                    <a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Log Out</a>
+                    <a class="dropdown-item" href="<?= Yii::$app->urlManager->createUrl(['/site/logout'])?>" data-method="post"><i class="dw dw-logout"></i> Chiqish</a>
                 </div>
             </div>
         </div>

@@ -18,7 +18,10 @@ FrontAsset::register($this);
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
 
-
+        <link rel="icon" href="/favicon.ico">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
 
     </head>
     <body class="drk">
@@ -113,6 +116,56 @@ FrontAsset::register($this);
             </ul>
         </div>
     <?php }?>
+
+    <?php if(Yii::$app->controller->action->id != 'orderlist'){?>
+    <a href="<?= Yii::$app->urlManager->createUrl(['/site/orderlist'])?>" class="place-order focus">
+        Buyurtmalarni ko'rish
+    </a>
+    <?php }?>
+
+
+    <?php
+    $url_remove = Yii::$app->urlManager->createUrl(['/site/orderremove']);
+    $url_add = Yii::$app->urlManager->createUrl(['/site/order']);
+    $url_total = Yii::$app->urlManager->createUrl(['/site/ordertotal']);
+    $this->registerJs("
+        
+        function getTotalPrice(){
+            if($('#total-price-b').length > 0){
+                 $.get('{$url_total}?id='+this.value).done(function(data){
+                    $('#total-price-b').empty();
+                    $('#total-price-b').append(data);
+                 })
+            }
+        }
+    
+        $('._remove').click(function(){
+            $.get('{$url_remove}?id='+this.value).done(function(data){
+                data = JSON.parse(data);
+                if(data.value == 0){
+                    $('#order-item-'+data.id).remove();
+                }else{
+                    $('#count-'+data.id).empty();
+                    $('#count-'+data.id).append(data.value);
+                }
+            });
+            getTotalPrice();
+        });
+        
+        $('._add').click(function(){
+            $.get('{$url_add}?id='+this.value).done(function(data){
+                data = JSON.parse(data);
+                if(data.value == 0){
+                    $('#order-item-'+data.id).remove();
+                }else{
+                    $('#count-'+data.id).empty();
+                    $('#count-'+data.id).append(data.value);
+                }
+            });
+            getTotalPrice();
+        });
+    ")
+    ?>
 
 
 

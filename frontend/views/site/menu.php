@@ -18,7 +18,12 @@ $this->title = "Shark night club";
 
 <div class="category">
     <div class="category-wrapper" id="categories">
-
+        <?php
+        $order = [];
+        if(Yii::$app->session->has('order')){
+            $order = Yii::$app->session->get('order');
+        }
+        ?>
         <?php foreach ($menu as $item):?>
             <div class="category-item">
                 <a>
@@ -38,6 +43,19 @@ $this->title = "Shark night club";
                                     <span class="menu-item-price__current">
                                         <b><?= $item->narxi ?></b> <span>сум</span>
                                     </span>
+
+                                </div>
+
+                            </div>
+                            <div class="order-item-count">
+                                <div class="order-action order-action--small order-action--value">
+                                    <button class="order-action-button _remove ripple focus" value="<?= $item->id?>">
+                                        –
+                                    </button>
+                                    <span class="order-action-count" id="count-<?= $item->id?>"><?= isset($order[$item->id]) ? $order[$item->id] : 0 ?></span>
+                                    <button class="order-action-button _add ripple focus" value="<?= $item->id?>">
+                                        +
+                                    </button>
                                 </div>
                             </div>
                         </div>

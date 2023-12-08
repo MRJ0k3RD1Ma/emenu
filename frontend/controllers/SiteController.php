@@ -97,6 +97,93 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionSearch($q){
+
+        $id = Navigate::find()->min('id');
+
+        $menu = Menu::find()->where(['like','name',$q])->andWhere(['status'=>1])->all();
+
+        return $this->render('menu',[
+            'menu'=>$menu,
+            'id'=>$id
+        ]);
+    }
+
+    public function actionOrder($id){
+        $order = [];
+        if(Yii::$app->session->has('order')){
+            $order = Yii::$app->session->get('order');
+        }
+
+        if(isset($order[$id])){
+            $order[$id]++;
+        }else{
+            $order[$id] = 1;
+        }
+
+        Yii::$app->session->set('order',$order);
+        return json_encode(['id'=>$id,'value'=>$order[$id]]);
+    }
+
+    public function actionOrderlist(){
+        $order = [];
+        if(Yii::$app->session->has('order')){
+            $order = Yii::$app->session->get('order');
+        }
+        return $this->render('orderlist',[
+            'order'=>$order
+        ]);
+    }
+
+    public function actionOrderone($id){
+        $order = [];
+        if(Yii::$app->session->has('order')){
+            $order = Yii::$app->session->get('order');
+        }
+
+        if(isset($order[$id])){
+            return json_encode(['id'=>$id,'value'=>$order[$id]]);
+        }else{
+            return json_encode(['id'=>$id,'value'=>0]);
+        }
+    }
+
+    public function actionOrdertotal(){
+        $order = [];
+        if(Yii::$app->session->has('order')){
+            $order = Yii::$app->session->get('order');
+        }
+        $total = 0;
+        foreach ($order as $key=>$item){
+            if($pro = Menu::findOne($key)){
+                $total += $item * $pro->narxi;
+            }
+        }
+        return $total;
+    }
+
+
+    public function actionOrderremove($id){
+        $order = [];
+        if(Yii::$app->session->has('order')){
+            $order = Yii::$app->session->get('order');
+        }
+        $u = false;
+        if(isset($order[$id])){
+            $order[$id]--;
+        }else{
+            $order[$id] = 0;
+        }
+        if($order[$id] <= 0){
+            unset($order[$id]);
+            $u = true;
+        }
+
+        Yii::$app->session->set('order',$order);
+
+        return $u ? json_encode(['id'=>$id,'value'=>0]) : json_encode(['id'=>$id,'value'=>$order[$id]]);
+    }
+
     /**
      * Logs in a user.
      *

@@ -1,9 +1,9 @@
 <div class="left-side-bar">
     <div class="brand-logo">
-        <a href="<?= Yii::$app->urlManager->createUrl(['/cp/'])?>">
-            <img src="/design/vendors/images/deskapp-logo.svg" alt="" class="dark-logo" />
+        <a style="background: #000" href="<?= Yii::$app->urlManager->createUrl(['/cp/'])?>">
+            <img src="/logo1.png" alt="" class="dark-logo" />
             <img
-                src="/design/vendors/images/deskapp-logo-white.svg"
+                src="/logo1.png"
                 alt=""
                 class="light-logo"
             />

@@ -17,6 +17,7 @@
   --input-bg-color: rgba(255, 255, 255, 0.1);
   --menu-bottom-color: #a9a9a9;
 }
+
 button{
   background-color: inherit;
   border: none;
@@ -182,7 +183,7 @@ ul {
   border-top: 1px solid var(--border-color);
   height: 70px;
   background-color: var(--bg-color);
-  position: fixed;
+/*  position: fixed;*/
   bottom: 0px;
   left: 0px;
   width: 100%;
@@ -784,4 +785,39 @@ h3 {
   padding: 15px;
   display: flex;
   flex-wrap: wrap;
+}
+
+.category-wrapper{
+  display: grid!important;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media  (max-width: 1024px){
+ .category-wrapper{
+  display: grid!important;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+} 
+}
+
+@media  (max-width: 768px){
+ .category-wrapper{
+  display: grid!important;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+} 
+}
+
+@media  (max-width: 450px){
+ .category-wrapper{
+  display: grid!important;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+} 
+}
+
+.category-item{
+  margin: 0!important;
+  padding: 0!important;
 }

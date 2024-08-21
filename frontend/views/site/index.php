@@ -18,8 +18,8 @@ $this->title = "Feromon lounge bar";
 
 <div class="category">
     <div class="category-wrapper" id="categories">
-
-        <?php foreach ($category as $item):?>
+            
+        <?php foreach ($category as $key=>$item):?>
         <div class="category-item">
             <a href="<?= Yii::$app->urlManager->createUrl(['/site/category','id'=>$item->id])?>">
                 <div class="category-img__wrapper">

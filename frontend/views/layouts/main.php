@@ -18,10 +18,7 @@ FrontAsset::register($this);
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
 
-        <link rel="icon" href="/favicon.ico">
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+        <link rel="icon" type="image/png" href="/logo.png">
 
     </head>
     <body class="drk">
@@ -32,7 +29,7 @@ FrontAsset::register($this);
         <div class="header-main">
             <div class="header-logo">
                 <h1 class="place-title">
-                    <span>SHARK NIGHT CLUB</span>
+                    <img src="/logo.png" style="height:50px; weight:auto;"/><span>FEROMON LOUNGE BAR</span>
                 </h1>
             </div>
         </div>

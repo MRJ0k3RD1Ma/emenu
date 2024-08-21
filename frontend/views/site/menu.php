@@ -1,5 +1,5 @@
 <?php
-$this->title = "Shark night club";
+$this->title = "Feromon lounge bar";
 /* @var $id  integer*/
 ?>
 

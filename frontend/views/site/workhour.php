@@ -8,39 +8,39 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use yii\captcha\Captcha;
 
-$this->title = 'Ish vaqtlari';
+$this->title = 'Рабочее время';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="work-hour">
-      <div class="contact-title">Ish vaqti</div>
+      <div class="contact-title">Рабочее время</div>
       <ul>
         <li>
-          <span class="day">Dushanba</span>
+          <span class="day">Понедельник</span>
           <span class="hour">10:00 - 23:00</span>
         </li>
         <li>
-          <span class="day">Seshanba</span>
+          <span class="day">Вторник</span>
           <span class="hour">10:00 - 23:00</span>
         </li>
         <li>
-          <span class="day">Chorshanba</span>
+          <span class="day">Среда</span>
           <span class="hour">10:00 - 23:00</span>
         </li>
         <li>
-          <span class="day">Payshanba</span>
+          <span class="day">Четверг</span>
           <span class="hour">10:00 - 23:00</span>
         </li>
         <li>
-          <span class="day">Juma</span>
+          <span class="day">Пятница</span>
           <span class="hour">10:00 - 23:00</span>
         </li>
         <li>
-          <span class="day">Shanba</span>
+          <span class="day">Суббота</span>
           <span class="hour">10:00 - 23:00</span>
         </li>
         <li>
-          <span class="day">Yaxshanba</span>
+          <span class="day">Воскресенье</span>
           <span class="hour">10:00 - 23:00</span>
         </li>
       </ul>

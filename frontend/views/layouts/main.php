@@ -173,7 +173,7 @@ FrontAsset::register($this);
 
     <?php if(Yii::$app->controller->action->id != 'orderlist'){?>
     <a href="<?= Yii::$app->urlManager->createUrl(['/site/orderlist'])?>" class="place-order focus">
-        Buyurtmalarni ko'rish
+        Посмотреть заказы
     </a>
     <?php }?>
 

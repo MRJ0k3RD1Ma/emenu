@@ -8,12 +8,12 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use yii\captcha\Captcha;
 
-$this->title = 'Bog\'lanish ma\'lumotlari';
+$this->title = 'Контактная информация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="contact">
-      <div class="contact-title">Bog'lanish uchun ma'lumotlar</div>
+      <div class="contact-title">Контактная информация</div>
       <div class="contact-item">
         <div class="contact-item__icon">
           <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -26,9 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
           </svg>
         </div>
         <div class="contact-item__content">
-          <div class="contact-item__title">Adres</div>
+          <div class="contact-item__title">Адрес</div>
           <div class="contact-item__about">
-            Urganch tumani (Raysentr) Yetkazib berish xizmati mavjud: 1177 /
+            г.Ургенч,ул.Аль-Хорезмий 77,ориентир почта БТС /
             Uzbekistan -
           </div>
         </div>
@@ -77,13 +77,14 @@ $this->params['breadcrumbs'][] = $this->title;
           </svg>
         </div>
         <div class="contact-item__content">
-          <div class="contact-item__title">Telefon</div>
-          <div class="contact-item__about">+99 890 123 45 67</div>
+          <div class="contact-item__title">Телефон</div>
+          <div class="contact-item__about">+99 893 744 44 44</div>
         </div>
       </div>
       <div class="contact-map">
+        
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4222.125612434475!2d60.622327229793555!3d41.55855950165786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41dfc9842c81fc9d%3A0x9e434d2b8a616ce9!2sIT%20Park!5e0!3m2!1suz!2s!4v1690697544487!5m2!1suz!2s"
+          src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1775.142901049292!2d60.6307101965922!3d41.56009746416731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDHCsDMzJzM2LjUiTiA2MMKwMzcnNTAuNSJF!5e0!3m2!1sru!2s!4v1724511836297!5m2!1sru!2s"
           width="100%"
           height="100%"
           style="border: 0"
@@ -93,12 +94,12 @@ $this->params['breadcrumbs'][] = $this->title;
         ></iframe>
       </div>
       <div class="contact-title">
-        Bizni ijtimoiy tarmoqlarda kuzatib boring
+        Следуйте за нами в социальных сетях
       </div>
       <div class="contact-social">
         <ul>
           <li>
-            <a href="#">
+            <a href="https://www.instagram.com/feromon_loungebar" target="_blank">
               <img src="/frdes/images/instagramIcon.svg" alt="instagramm">
             </a>
           </li>

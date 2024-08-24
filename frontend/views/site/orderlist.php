@@ -1,13 +1,13 @@
 <?php
 
 /* @var $order array */
-$this->title = "Buyurtmalar ro`yhati";
+$this->title = "Список заказов";
 ?>
 
 
 <div class="orderlist-wrapper">
 
-<h2 class="h2" style="display: block; width: 100%"><span>Mening buyurtmalarim:</span></h2>
+<h2 class="h2" style="display: block; width: 100%"><span>Список заказов:</span></h2>
     <br>
 
     <?php $price = 0; foreach ($order as $key=>$item):
@@ -43,11 +43,11 @@ $this->title = "Buyurtmalar ro`yhati";
 
 
 
-<div class="order-total-price"><span>Barchasi: </span>
+<div class="order-total-price"><span>Общая стоимость: </span>
     <div class="menu-item-price menu-item-price--regular">
         <span class="menu-item-price__current">
             <b id="total-price-b"><?= Yii::$app->formatter->format($price,['decimal',0])?></b>
-            <span>so'm</span>
+            <span>сум</span>
         </span>
     </div>
 </div>
